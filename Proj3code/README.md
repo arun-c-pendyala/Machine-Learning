@@ -1,4 +1,4 @@
-#Project 3 Classification
+# Project 3 Classification
 
 This project is to implement and evaluate classification algorithms on MNIST Dataset and USPS Dataset. 
 
