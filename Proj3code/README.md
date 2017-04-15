@@ -1,5 +1,7 @@
 # Project 3 Classification
 
+## Handwritten Digits Recognition using Logistic Regression and Neural Networks
+
 This project is to implement and evaluate classification algorithms on MNIST Dataset and USPS Dataset. 
 
 The MNIST database is a large database of handwritten digits that is commonly used for training various image processing systems.
