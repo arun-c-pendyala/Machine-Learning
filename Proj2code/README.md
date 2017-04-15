@@ -1,4 +1,4 @@
-# Linear Regression
+# Project 2 Linear Regression
 
 ## Page Relevance Prediction using Linear Regression
 
