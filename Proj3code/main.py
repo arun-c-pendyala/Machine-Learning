@@ -35,7 +35,7 @@ count = 0
 ustest = []
 us_t_set = []
 
-for i in  range(0,10):
+for i in  range(0,10):  #There are 10 folders with several images corresponding to each number
     for image in gb.glob('USPSdata/Numerals/'+ str(i) +'/*.png'):
     
         img = im.open(image)    
@@ -50,13 +50,13 @@ for i in  range(0,10):
         
     
 ustest = np.array(ustest)
-ustest_norm = np.divide(ustest,255,dtype=float)
+ustest_norm = np.divide(ustest,255,dtype=float)  #normalise the data
 ustest_new = 1 - ustest_norm
 us_t_set = np.array(us_t_set)
 
 t_k_bin = np.zeros((19999,10))
 
-for i in range(0,19999):
+for i in range(0,19999):  # true label in binary matrix form - number is represented by 1 in corresponding index
     t_k_bin[i][us_t_set[i]] = 1
 
 
@@ -66,7 +66,7 @@ import numpy as np
 
 
 n_len = 50000
-d_len = 784
+d_len = 784  #28 x 28
 k = 10 #corresponds to each digit 
 t = np.zeros((n_len,1))
 x = np.zeros((n_len,d_len))
@@ -81,10 +81,10 @@ t_k_bin = np.zeros((n_len,k))
 for i in range(0,n_len):
     t_k_bin[i][t[i]] = 1
 
-w_k = np.random.rand(d_len,k) 
+w_k = np.random.rand(d_len,k) # randomly assigned initial weights
 
 b_k = 1
-eta = 0.01  # 0.01 
+eta = 0.01  # learning rate
 
 
 a_k_arr = np.dot(x, w_k) + b_k
@@ -107,7 +107,7 @@ w = w_k #use w for updation of weights
 x_arr = np.zeros((1,784))
 
   
-for j in range(0,10): #10
+for j in range(0,10): 
     for i in range(0,50000):
         x_arr = np.reshape(x[i], (1,784))
        
@@ -120,17 +120,17 @@ for j in range(0,10): #10
 
 a_k_new =  np.dot(x, w) + b_k
 
-a_exp_new = np.exp(a_k_new)  #/50000
+a_exp_new = np.exp(a_k_new)  
 a_j_sum_new = np.matrix.sum(np.matrix(a_exp_new), axis =1)
 
 y_k_new = a_exp_new/a_j_sum_new
 
-#classification
+#classification and find error rate
 
 c = np.argmax(y_k_new, axis=1)
 
 n_corr=0
-for i in range(0,50000):
+for i in range(0,50000):   # correct count
     if(c[i]==t[i]):
         n_corr += 1
 print "Accuracy- training set"        
@@ -150,13 +150,13 @@ a_j_sum_valtn = np.matrix.sum(np.matrix(a_exp_valtn), axis =1)
 
 y_k_valtn = a_exp_valtn/a_j_sum_valtn
 
-#classification
+#classification and find error rate
 
 c = np.argmax(y_k_valtn, axis=1)
 
 n_corr=0
 for i in range(0,10000):
-    if(c[i]==t_valtn[i]):
+    if(c[i]==t_valtn[i]): # correct count
         n_corr += 1
 print "Accuracy - validation set"        
 print float(n_corr)/10000
@@ -176,12 +176,12 @@ a_j_sum_valtn = np.matrix.sum(np.matrix(a_exp_valtn), axis =1)
 
 y_k_valtn = a_exp_valtn/a_j_sum_valtn
 
-#classification
+#classification and find error rate
 
 c = np.argmax(y_k_valtn, axis=1)
 
 n_corr=0
-for i in range(0,10000):
+for i in range(0,10000): # correct count
     if(c[i]==t_tst[i]):
         n_corr += 1
 print "Accuracy - testing set"       
@@ -244,7 +244,7 @@ b_k = 1
 b_j = 1
 
     
-for j in range(0,20):   
+for j in range(0,20):   # iterative update of weights
     for i in range(0,n_len):
         
         
@@ -302,7 +302,7 @@ y_k_bin = a_exp/a_j_sum
 #classification
 
 c = np.argmax(y_k_bin, axis=1)
-#n_corr = np.count_nonzero(c==t)
+
 n_corr=0
 for i in range(0,50000):
     if(c[i]==t[i]):
