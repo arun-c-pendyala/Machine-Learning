@@ -59,8 +59,6 @@ t_k_bin = np.zeros((19999,10))
 for i in range(0,19999):  # true label in binary matrix form - number is represented by 1 in corresponding index
     t_k_bin[i][us_t_set[i]] = 1
 
-
-
 import numpy as np
 #<------------**************** 1. logistic regression ********************----------------->
 
@@ -88,17 +86,13 @@ eta = 0.01  # learning rate
 
 
 a_k_arr = np.dot(x, w_k) + b_k
-
-
 y_k_bin = np.zeros((n_len,k))
 
 a_j_sum = np.zeros((1,k))
 
 a_exp = np.exp(a_k_arr)
 
-
 a_j_sum = np.matrix.sum(np.matrix(a_exp), axis =1)
-
 
 y_k_bin = a_exp/a_j_sum
 
@@ -106,7 +100,6 @@ w = w_k #use w for updation of weights
 
 x_arr = np.zeros((1,784))
 
-  
 for j in range(0,10): 
     for i in range(0,50000):
         x_arr = np.reshape(x[i], (1,784))
@@ -116,7 +109,6 @@ for j in range(0,10):
         a_j_sum_new = np.matrix.sum(np.matrix(a_exp_new), axis =1)
         y_k_bin = a_exp_new/a_j_sum_new
         w += np.dot(eta , np.dot( np.transpose(x_arr)  ,np.subtract(t_k_bin[i] ,y_k_bin)))
-    
 
 a_k_new =  np.dot(x, w) + b_k
 
@@ -140,7 +132,6 @@ print float(n_corr)/n_len
 
 x = val_set[0]
 t_valtn = val_set[1]
-
 
 b_k_valtn = np.ones((10000,1))
 
@@ -193,7 +184,6 @@ print float(n_corr )/10000
 x = ustest_new
 t_valtn = us_t_set
 
-
 b_k_valtn = np.ones((19999,1))
 
 a_k_valtn =  np.dot(x, w) + b_k_valtn
@@ -213,8 +203,6 @@ for i in range(0,19999):
         n_corr += 1
 print "Accuracy - testing USPS data"        
 print float(n_corr)/19999
-
-
 
 #<------------**************** 2.single layer neural network ********************----------------->
 
@@ -242,62 +230,46 @@ w_ji = np.random.rand(d_len,m_len)/1000
 w_kj = np.random.rand(m_len,k_len)/1000 
 b_k = 1
 b_j = 1
-
-    
+   
 for j in range(0,20):   # iterative update of weights
     for i in range(0,n_len):
-        
-        
+         
         x_arr = np.reshape(x[i], (1,784))
         temp_j = np.dot(x_arr , w_ji) + b_j 
          
         z_j = 1/(1+np.exp(-1 * temp_j))
         
-        
         a_k_arr = np.dot(z_j , w_kj) + b_k  
         
         a_exp = np.exp(a_k_arr)
-        
         
         a_j_sum = np.matrix.sum(np.matrix(a_exp), axis =1)
         
         y_k_bin = a_exp/a_j_sum
         
-        
         del_k = y_k_bin - t_k_bin[i]
         
         h_zj_der = np.dot((1-z_j),np.transpose(z_j))
         
-       
-        
         del_j = np.dot(h_zj_der , np.dot(del_k,np.transpose(w_kj)))
-        
-        
-        do_e_1 = np.dot(np.transpose(x_arr),del_j)
+        o_e_1 = np.dot(np.transpose(x_arr),del_j)
         
         do_e_2 = np.dot(np.transpose(z_j),del_k)
         
         w_ji -= np.dot(eta,do_e_1)
         w_kj -= np.dot(eta, do_e_2)
-    
-
+   
 temp_j = np.dot(x , w_ji) + b_j 
  
 z_j = 1/(1+np.exp(-1 * temp_j))
 
-
 a_k_arr = np.dot(z_j , w_kj) + b_k  
 
-
-
 a_exp = np.exp(a_k_arr)
-
 
 a_j_sum = np.matrix.sum(np.matrix(a_exp), axis =1)
 
 y_k_bin = a_exp/a_j_sum
-
-
 
 #classification
 
@@ -325,16 +297,11 @@ z_j = 1/(1+np.exp(-1 * temp_j))
 
 a_k_arr = np.dot(z_j , w_kj) + b_k  
 
-
-
 a_exp = np.exp(a_k_arr)
-
 
 a_j_sum = np.matrix.sum(np.matrix(a_exp), axis =1)
 
 y_k_bin = a_exp/a_j_sum
-
-
 
 #classification
 
@@ -353,15 +320,11 @@ print float(n_corr)/valtst_len
 x = tst_set[0]
 t = tst_set[1]
 
-
 temp_j = np.dot(x , w_ji) + b_j 
  
 z_j = 1/(1+np.exp(-1 * temp_j))
 
-
 a_k_arr = np.dot(z_j , w_kj) + b_k  
-
-
 
 a_exp = np.exp(a_k_arr)
 
@@ -369,8 +332,6 @@ a_exp = np.exp(a_k_arr)
 a_j_sum = np.matrix.sum(np.matrix(a_exp), axis =1)
 
 y_k_bin = a_exp/a_j_sum
-
-
 
 #classification
 
@@ -382,13 +343,7 @@ for i in range(0,valtst_len):
         n_corr += 1
 print "Accuracy -testing set"        
 print float(n_corr)/valtst_len
-      
-    
-
-
-
-
-
+ 
 #-------------------testing USPS Data (Neural network)-------------------------
 
 
@@ -403,16 +358,11 @@ z_j = 1/(1+np.exp(-1 * temp_j))
 
 a_k_arr = np.dot(z_j , w_kj) + b_k  
 
-
-
 a_exp = np.exp(a_k_arr)
-
 
 a_j_sum = np.matrix.sum(np.matrix(a_exp), axis =1)
 
 y_k_bin = a_exp/a_j_sum
-
-
 
 #classification
 
